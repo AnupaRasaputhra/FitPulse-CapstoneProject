@@ -6,6 +6,7 @@ FitPulse is an Android Application, offering goal-setting features, BMI and calo
 
 - Anupa Dilshan Rasaputhra
 - Bhuwan Malla
+- Nayan Thapa
 
 # Data Source
 
