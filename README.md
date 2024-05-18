@@ -29,3 +29,12 @@ Single-user input. All data will originate from the user and stay within the dev
 - Users can see their step count history over time so that they can track their progress.
 
 - Users can see a splash screen when open the app so that they have a visually appealing experience.
+
+- Users can calculate their daily calorie needs to manage their diet more effictively.
+
+- Users can log their workouts to keep a record of their exercise routines.
+
+- Users can see a visual summary of their progress against the goal.
+
+- Users can watch an in-app tutorial when using the app.
+
