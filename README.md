@@ -21,3 +21,10 @@ Single-user input. All data will originate from the user and stay within the dev
 
 - Users can choose between light and dark modes so that they can use the app comfortably in different lighting conditions.
 
+-  Users can set daily goals like daily step goals, and daily water intake goals so that they have a target to achieve.
+
+- Users can track their daily step count to monitor their physical activity.
+
+- Users can see their step count history over time so that they can track their progress.
+
+- Users can see a splash screen when open the app so that they have a visually appealing experience.
