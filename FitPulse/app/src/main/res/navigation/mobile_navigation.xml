@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/set_goals"
+        android:name="com.example.fitpulse.ui.setgoals.fragment_setgoals"
+        android:label="Set Goals"
+        tools:layout="@layout/fragment_setgoals" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.fitpulse.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
@@ -22,4 +28,5 @@
         android:name="com.example.fitpulse.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
 </navigation>
