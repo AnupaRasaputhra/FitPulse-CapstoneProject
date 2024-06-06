@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FitPulse</string>
+    <string name="calorieHeader">Understanding calories helps you manage weight, makes informed diet, maintain energy balance, and prevent diseases.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -10,6 +11,16 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Calculate BMI </string>
     <string name="menu_slideshow">Calculate Calories</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="Weight">Weight</string>
+    <string name="gender">Gender</string>
+    <string name="activityLevel">Activity Level</string>
+    <string name="goal">Goal</string>
+    <string name="genderhint">Eg. Male</string>
+    <string name="buttonSubmit">Submit</string>
+    <string name="Heightincm">Height (in feet inch)</string>
+    <string name="WeightinKg">Weight in Kg</string>
+    <string name="HeightInMeters">Height in Meter</string>
 </resources>

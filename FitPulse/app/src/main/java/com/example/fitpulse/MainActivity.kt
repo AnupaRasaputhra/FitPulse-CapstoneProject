@@ -1,19 +1,17 @@
 package com.example.fitpulse
 
 import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.example.fitpulse.databinding.ActivityMainBinding
+import com.example.fitpulse.ui.slideshow.SlideshowFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -26,33 +24,29 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-        }
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
+        val drawerLayout = binding.drawerLayout
+        val navView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.set_goals, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.set_goals, R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
-
+        // Pass MainActivity as the listener to the SlideshowFragment
+        val fragment = supportFragmentManager.findFragmentById(R.id.nav_slideshow)
+        if (fragment is SlideshowFragment) {
+            fragment.callback = this
+        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+    // Implement the onSubmitClicked method to handle the data received from the SlideshowFragment
+    override fun onSubmitClicked(calculatedBmi: Double) {
+        // Handle the data here, for example, you can log it or perform any other actions
+//        Log.d("MainActivity", "Age: $age, Height: $height, Weight: $weight, Gender: $gender, Goal: $goal")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -60,3 +54,4 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
+
