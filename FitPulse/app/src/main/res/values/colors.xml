@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="layout_background">#E5E9ED</color>
+    <color name="card_background">#89ACD0</color>
+    <color name="text_hint">#737584</color>
+    <color name="button_bg">#543F79</color>
+
+    <color name="under_weight">#855713</color>
+    <color name="normal">#4CAF50</color>
+    <color name="over_weight">#A9433C</color>
+    <color name="obese">#F44336</color>
 </resources>
