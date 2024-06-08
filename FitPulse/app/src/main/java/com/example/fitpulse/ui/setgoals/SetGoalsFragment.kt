@@ -5,10 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.fitpulse.R
+import org.w3c.dom.Text
 
-class fragment_setgoals : Fragment() {
+class SetGoalsFragment : Fragment() {
+
+//    private val viewModel: SetGoalsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +30,18 @@ class fragment_setgoals : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         SetGoalsDialogFragment().show(requireActivity().supportFragmentManager,"")
+
+        val textView: TextView = view.findViewById(R.id.datas)
+
+////         Observe the selected goal
+//        viewModel.selectedGoals.observe(viewLifecycleOwner) { selectedGoal ->
+//
+//            textView.text = selectedGoal
+//            requireActivity().findViewById<TextView>(R.id.targetSteps).text= "afkdf"
+//
+//            Toast.makeText(context, "Selected goal: $selectedGoal", Toast.LENGTH_SHORT).show()
+//        }
     }
 
 }

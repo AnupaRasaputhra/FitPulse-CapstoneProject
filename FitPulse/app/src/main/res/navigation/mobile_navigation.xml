@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/set_goals"
-        android:name="com.example.fitpulse.ui.setgoals.fragment_setgoals"
+        android:name="com.example.fitpulse.ui.setgoals.SetGoalsFragment"
         android:label="Set Goals"
         tools:layout="@layout/fragment_setgoals" />
 
