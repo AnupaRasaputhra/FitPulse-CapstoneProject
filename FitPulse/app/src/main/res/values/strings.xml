@@ -33,4 +33,6 @@
     <string name="Female">female</string>
     <string name="HeightInCm">Height In Cm</string>
     <string name="Gender">Gender :</string>
+    <string name="enter_goal_value">Enter goal value</string>
+    <string name="set_goal">Set Goal</string>
 </resources>
