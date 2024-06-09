@@ -154,7 +154,7 @@
         android:elevation="20dp"
         android:text="@string/calculate"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/cardResult"
