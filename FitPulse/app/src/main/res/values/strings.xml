@@ -25,13 +25,13 @@
     <string name="HeightInMeters">Height in Meter</string>
     <string name="healthy_range">{healthy range is 18.5 - 24.9}</string>
     <string name="calculate">Calculate</string>
-    <string name="cm">Cm</string>
+    <string name="cm">cm</string>
     <string name="kg">Kg</string>
     <string name="fit_pulse">Fit Pulse</string>
     <string name="menu_gallery">Calculate BMI </string>
     <string name="Male">male</string>
     <string name="Female">female</string>
-    <string name="HeightInCm">Height In Cm</string>
+    <string name="HeightInCm">Height In cm</string>
     <string name="Gender">Gender :</string>
     <string name="enter_goal_value">Enter goal value</string>
     <string name="set_goal">Set Goal</string>
