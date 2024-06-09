@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentSlideshowBinding
 import com.example.fitpulse.ui.home.HomeViewModel
 
@@ -22,7 +24,7 @@ class SlideshowFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
 
     interface OnSubmitClickListener {
-        fun onSubmitClicked(calculatedBmi: Double)
+        fun onSubmitClicked(calculatedCalories: Double)
     }
 
     override fun onAttach(context: Context) {
@@ -58,10 +60,8 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel.height.observe(viewLifecycleOwner) { newHeight ->
             val currentHeightText = binding.textInputHeight.text.toString()
             if (currentHeightText != newHeight.toString()) {
-                // Save current cursor position
                 val cursorPosition = binding.textInputHeight.selectionStart
                 binding.textInputHeight.setText(newHeight.toString())
-                // Set cursor position back to where it was
                 binding.textInputHeight.setSelection(cursorPosition)
             }
         }
@@ -69,17 +69,32 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel.weight.observe(viewLifecycleOwner) { newWeight ->
             val currentWeightText = binding.textInputWeight.text.toString()
             if (currentWeightText != newWeight.toString()) {
-                // Save current cursor position
                 val cursorPosition = binding.textInputWeight.selectionStart
                 binding.textInputWeight.setText(newWeight.toString())
-                // Set cursor position back to where it was
                 binding.textInputWeight.setSelection(cursorPosition)
             }
         }
 
         slideshowViewModel.gender.observe(viewLifecycleOwner) { newGender ->
-            if (binding.textInputGender.text.toString() != newGender) {
-                binding.textInputGender.setText(newGender)
+            val selectedGender = when (newGender) {
+                "Male" -> R.id.radioMale
+                "Female" -> R.id.radioFemale
+                else -> -1
+            }
+            if (selectedGender != -1 && binding.radioGroupGender.checkedRadioButtonId != selectedGender) {
+                binding.radioGroupGender.check(selectedGender)
+            }
+        }
+
+        // Set up the RadioGroup for gender
+        binding.radioGroupGender.setOnCheckedChangeListener { group, checkedId ->
+            val gender = when (checkedId) {
+                R.id.radioMale -> "Male"
+                R.id.radioFemale -> "Female"
+                else -> ""
+            }
+            if (slideshowViewModel.gender.value != gender) {
+                slideshowViewModel.updateGender(gender)
             }
         }
 
@@ -102,13 +117,7 @@ class SlideshowFragment : Fragment() {
             try {
                 slideshowViewModel.updateWeight(text.toString().toDouble())
             } catch (e: NumberFormatException) {
-                Log.e("Exception", "cannot update Height")
-            }
-        }
-
-        binding.textInputGender.addTextChangedListener { text ->
-            if (slideshowViewModel.gender.value != text.toString()) {
-                slideshowViewModel.updateGender(text.toString())
+                Log.e("Exception", "cannot update Weight")
             }
         }
 
@@ -116,21 +125,34 @@ class SlideshowFragment : Fragment() {
             val age = binding.textInputAge.text.toString()
             val height = binding.textInputHeight.text.toString()
             val weight = binding.textInputWeight.text.toString()
-            val gender = binding.textInputGender.text.toString()
+            val gender = when (binding.radioGroupGender.checkedRadioButtonId) {
+                R.id.radioMale -> "Male"
+                R.id.radioFemale -> "Female"
+                else -> ""
+            }
 
             slideshowViewModel.updateAge(age)
             slideshowViewModel.updateHeight(height.toDouble())
             slideshowViewModel.updateWeight(weight.toDouble())
             slideshowViewModel.updateGender(gender)
-            slideshowViewModel.calculateBmi()
+            slideshowViewModel.calculateCaloriesNeeds()
+            slideshowViewModel.caloriesNeeded.value?.let { calculatedCalories ->
+                callback?.onSubmitClicked(calculatedCalories)
+                val formattedResult = "Your estimated daily caloric need is:\n" + "$calculatedCalories calories"
+                binding.resultTV.text = formattedResult
+                binding.resultTV.visibility = View.VISIBLE
+            }
+            // Hide the keyboard
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
         }
 
         homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
         // Observe LiveData properties and update UI
-        slideshowViewModel.bmi.observe(viewLifecycleOwner) { bmiValue ->
+        slideshowViewModel.caloriesNeeded.observe(viewLifecycleOwner) { caloriesValue ->
             // Update BMI value in HomeViewModel
-            homeViewModel.updateBmi(bmiValue)
+            homeViewModel.updateCaloriesNeeded(caloriesValue)
         }
 
         return root

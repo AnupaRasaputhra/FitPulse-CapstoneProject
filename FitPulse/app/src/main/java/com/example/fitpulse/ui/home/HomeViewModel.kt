@@ -12,4 +12,11 @@ class HomeViewModel : ViewModel() {
     fun updateBmi(newBmi: Double) {
         _bmi.value = newBmi
     }
+
+    private val _caloriesNeeded = MutableLiveData<Double>()
+    val caloriesNeeded: LiveData<Double> = _caloriesNeeded
+
+    fun updateCaloriesNeeded(newCaloriesNeeded: Double) {
+        _caloriesNeeded.value = newCaloriesNeeded
+    }
 }

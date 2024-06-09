@@ -28,4 +28,9 @@
     <string name="cm">Cm</string>
     <string name="kg">Kg</string>
     <string name="fit_pulse">Fit Pulse</string>
+    <string name="menu_gallery">Calculate BMI </string>
+    <string name="Male">male</string>
+    <string name="Female">female</string>
+    <string name="HeightInCm">Height In Cm</string>
+    <string name="Gender">Gender :</string>
 </resources>

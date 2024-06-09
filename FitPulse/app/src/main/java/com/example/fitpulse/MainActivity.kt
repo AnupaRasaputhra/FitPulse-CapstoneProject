@@ -15,7 +15,7 @@ import com.example.fitpulse.databinding.ActivityMainBinding
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 import com.example.fitpulse.ui.slideshow.SlideshowFragment
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +45,16 @@ class MainActivity : AppCompatActivity(){
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Pass MainActivity as the listener to the SlideshowFragment
+        val fragment = supportFragmentManager.findFragmentById(R.id.nav_slideshow)
+        if (fragment is SlideshowFragment) {
+            fragment.callback = this
+        }
+
+    }
+
+    override fun onSubmitClicked(calculatedCalories: Double) {
+        Log.d("MainActivity", "Calculated Calories: $calculatedCalories")
     }
 
     override fun onSupportNavigateUp(): Boolean {
