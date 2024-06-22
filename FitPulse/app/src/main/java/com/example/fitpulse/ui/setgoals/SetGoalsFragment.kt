@@ -32,16 +32,6 @@ class SetGoalsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         SetGoalsDialogFragment().show(requireActivity().supportFragmentManager,"")
 
-        val textView: TextView = view.findViewById(R.id.datas)
-
-////         Observe the selected goal
-//        viewModel.selectedGoals.observe(viewLifecycleOwner) { selectedGoal ->
-//
-//            textView.text = selectedGoal
-//            requireActivity().findViewById<TextView>(R.id.targetSteps).text= "afkdf"
-//
-//            Toast.makeText(context, "Selected goal: $selectedGoal", Toast.LENGTH_SHORT).show()
-//        }
     }
 
 }

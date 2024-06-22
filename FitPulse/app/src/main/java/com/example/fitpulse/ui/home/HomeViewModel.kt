@@ -6,6 +6,13 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
 
+    private val _stepsGoal = MutableLiveData<Int>()
+    val stepsGoal: LiveData<Int> = _stepsGoal
+
+    fun updateStepsGoal(newStepsGoal: Int) {
+        _stepsGoal.value = newStepsGoal
+    }
+
     private val _bmi = MutableLiveData<Double>()
     val bmi: LiveData<Double> = _bmi
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -28,7 +29,7 @@ class SetGoalsDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val goalOptions = arrayOf("Steps", "Water Intake")
+        val goalOptions = arrayOf("Foot Steps", "Water Intake")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, goalOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.goalTypeSpinner.adapter = adapter
@@ -37,12 +38,12 @@ class SetGoalsDialogFragment : DialogFragment() {
             val selectedGoalType = binding.goalTypeSpinner.selectedItem.toString()
             val goalValue = binding.goalValueEditText.text.toString()
 
-            if (selectedGoalType == "Steps") {
+            if (selectedGoalType == "Foot Steps") {
                 viewModel.setSelectedStepsGoal(goalValue)
             } else {
                 viewModel.setSelectedWaterGoal(goalValue)
             }
-
+            
             dismiss()
             findNavController().navigate(R.id.nav_home)
         }
