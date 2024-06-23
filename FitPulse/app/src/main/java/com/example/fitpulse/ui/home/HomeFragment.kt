@@ -64,14 +64,13 @@ class HomeFragment() : Fragment(), SensorEventListener {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         running = true
-        val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        val stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if (stepSensor == null) {
-            Toast.makeText(requireContext(), "NO motion", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No motion has been detected.", Toast.LENGTH_SHORT).show()
         } else {
             sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
@@ -125,5 +124,4 @@ class HomeFragment() : Fragment(), SensorEventListener {
         previousStep = savedSteps!!
 
     }
-
 }

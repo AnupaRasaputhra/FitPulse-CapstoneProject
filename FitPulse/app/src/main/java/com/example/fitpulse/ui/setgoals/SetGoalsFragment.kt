@@ -14,8 +14,6 @@ import org.w3c.dom.Text
 
 class SetGoalsFragment : Fragment() {
 
-//    private val viewModel: SetGoalsViewModel by activityViewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
