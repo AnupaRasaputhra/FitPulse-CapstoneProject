@@ -18,7 +18,7 @@ class SetGoalsViewModel(application: Application) : AndroidViewModel(application
     val selectedStepsGoal: LiveData<String> get() = _selectedStepsGoal
 
     private val _selectedWaterGoal = MutableLiveData<String>().apply {
-        value = sharedPreferences.getString("water_goal", "0L")
+        value = sharedPreferences.getString("water_goal", "0")
     }
     val selectedWaterGoal: LiveData<String> get() = _selectedWaterGoal
 

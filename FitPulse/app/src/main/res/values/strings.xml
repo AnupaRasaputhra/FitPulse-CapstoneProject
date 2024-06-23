@@ -35,4 +35,14 @@
     <string name="Gender">Gender :</string>
     <string name="enter_goal_value">Enter goal value</string>
     <string name="set_goal">Set Goal</string>
+    <string name="daily_drink_target">Daily Drink Target</string>
+    <string name="_50_ml">50 ml</string>
+    <string name="_100_ml">100 ml</string>
+    <string name="_150_ml">150 ml</string>
+    <string name="_200_ml">200 ml</string>
+    <string name="_250_ml">250 ml</string>
+    <string name="custom">Custom</string>
+    <string name="_2000">2000</string>
+    <string name="enter_custom_input">Enter Custom Input</string>
+    <string name="water_intake">Water Intake</string>
 </resources>

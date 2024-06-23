@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentHomeBinding
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
@@ -60,8 +61,27 @@ class HomeFragment() : Fragment(), SensorEventListener {
 
         viewModel.selectedWaterGoal.observe(viewLifecycleOwner) { waterGoal ->
             binding.waterIntakeCardView.findViewById<TextView>(R.id.waterTarget).text =
-                "/${waterGoal} Ltr"
+                "${waterGoal}"
         }
+
+        binding.waterIntakeCardView.setOnClickListener {
+            val waterGoal = binding.waterIntakeCardView.findViewById<TextView>(R.id.waterTarget).text.toString().replace("/", "").toInt()
+            val waterIntake = binding.waterIntake.findViewById<TextView>(R.id.waterIntake).text.toString().toInt()
+
+            val bundle = Bundle()
+            bundle.putInt("waterGoal", waterGoal)
+            bundle.putInt("waterIntake", waterIntake)
+
+            findNavController().navigate(R.id.action_homeFragment_to_waterIntakeFragment, bundle)
+        }
+
+        val waterIntake = arguments?.getInt("waterIntake", 0)
+        updateWaterIntakeTextView(waterIntake ?: 0)
+    }
+    
+    private fun updateWaterIntakeTextView(intake: Int) {
+        val waterIntakeTextView = view?.findViewById<TextView>(R.id.waterIntake)
+        waterIntakeTextView?.text = intake.toString()
     }
 
     override fun onResume() {

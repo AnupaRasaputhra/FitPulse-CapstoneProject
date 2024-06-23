@@ -91,9 +91,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/waterIntakeCardView"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
         android:layout_margin="10dp"
-        android:backgroundTint="#938E8E">
+        android:backgroundTint="#7BAED7">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,8 +104,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Water Tracker"
-                android:textColor="#0A3CF6"
+                android:text="@string/water_intake"
+                android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -113,39 +113,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-
                 android:padding="16dp">
 
-                <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                    android:id="@+id/circularProgressBarForWater"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:cpb_background_progressbar_color="#b6bbd8"
-                    app:cpb_background_progressbar_width="5dp"
-                    app:cpb_progress_direction="to_right"
-                    app:cpb_progressbar_color="#EF4F1D"
-                    app:cpb_progressbar_width="10dp"
-                    app:cpb_round_border="false" />
+                <ImageView
+                    android:id="@+id/waterIntakeImage"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/water_intake" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
+                <TextView
+                    android:id="@+id/waterIntake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{viewModel.waterIntake}"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/waterFraction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="/"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/waterTarget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:text="/0 Ltr"
+                    android:layout_marginTop="8dp"
+                    android:text="0"
+
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/waterUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ml"
                     android:textColor="#000000"
                     android:textSize="18sp" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 
 
     <androidx.cardview.widget.CardView

@@ -59,5 +59,6 @@ dependencies {
     implementation("androidx.compose.material:material")
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 
-
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 }
