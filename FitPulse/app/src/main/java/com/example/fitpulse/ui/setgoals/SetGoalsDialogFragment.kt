@@ -38,25 +38,31 @@ class SetGoalsDialogFragment : DialogFragment() {
             val selectedGoalType = binding.goalTypeSpinner.selectedItem.toString()
             val goalValue = binding.goalValueEditText.text.toString()
 
-            if(goalValue.isNotEmpty() && goalValue <= 0.toString()) {
-                Toast.makeText(requireContext(), "Goals can not be empty, 0 or in negative format.", Toast.LENGTH_SHORT).show()
+            if (goalValue.isEmpty()) {
+                Toast.makeText(requireContext(), "Goal value cannot be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            try {
+                val goalValueInt = goalValue.toInt()
+                if (goalValueInt <= 0) {
+                    Toast.makeText(requireContext(), "Goal value must be greater than 0", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+            } catch (e: NumberFormatException) {
+                Toast.makeText(requireContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (selectedGoalType == "Foot Steps") {
                 viewModel.setSelectedStepsGoal(goalValue)
             } else {
                 viewModel.setSelectedWaterGoal(goalValue)
             }
-            
+
             dismiss()
             findNavController().navigate(R.id.nav_home)
         }
-    }
-
-    private fun navigateToHome() {
-        activity?.supportFragmentManager?.popBackStackImmediate()
     }
 
     override fun onDestroyView() {
