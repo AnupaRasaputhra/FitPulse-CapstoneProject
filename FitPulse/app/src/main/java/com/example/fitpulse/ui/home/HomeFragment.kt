@@ -75,6 +75,10 @@ class HomeFragment() : Fragment(), SensorEventListener {
             findNavController().navigate(R.id.action_homeFragment_to_waterIntakeFragment, bundle)
         }
 
+        binding.logWorkoutCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_logWorkoutFragment)
+        }
+
         val waterIntake = arguments?.getInt("waterIntake", 0)
         updateWaterIntakeTextView(waterIntake ?: 0)
     }
@@ -118,7 +122,6 @@ class HomeFragment() : Fragment(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Not used, but required to implement SensorEventListener
     }
 
 

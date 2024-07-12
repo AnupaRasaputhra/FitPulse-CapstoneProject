@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="editTextTitle" type="id" />
+    <item name="textViewTitle" type="id" />
+    <item name="logWorkoutFragment" type="id" />
+    <item name="editTextDescription" type="id" />
+    <item name="editTextDuration" type="id" />
+    <item name="buttonPickDate" type="id" />
+    <item name="textViewSelectedDate" type="id" />
+    <item name="buttonSaveWorkout" type="id" />
+</resources>

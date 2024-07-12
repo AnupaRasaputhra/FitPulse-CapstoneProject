@@ -26,6 +26,9 @@
                 app:argType="integer"
                 android:defaultValue="0" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_logWorkoutFragment"
+            app:destination="@id/logWorkoutFragment" />
     </fragment>
 
     <fragment
@@ -45,6 +48,12 @@
         android:name="com.example.fitpulse.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/logWorkoutFragment"
+        android:name="com.example.fitpulse.ui.logWorkout.LogWorkoutFragment"
+        android:label="Log Workout"
+        tools:layout="@layout/fragment_log_workout" />
 
     <fragment
         android:id="@+id/fragment_water_intake"
