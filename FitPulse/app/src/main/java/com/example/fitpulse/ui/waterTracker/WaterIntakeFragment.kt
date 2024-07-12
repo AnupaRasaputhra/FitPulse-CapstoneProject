@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.fitpulse.MainActivity
 import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentWaterIntakeBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -39,8 +40,14 @@ class WaterIntakeFragment : Fragment() {
         viewModel.setTargetIntake(waterGoal)
         viewModel.setCurrentIntake(waterIntake)
 
-
+        // Set the app bar title
+        (requireActivity() as MainActivity).setActionBarTitle("Water Intake")
     }
+
+
+
+
+
 
     private fun observeViewModel() {
         viewModel.targetIntake.observe(viewLifecycleOwner, { targetIntake ->

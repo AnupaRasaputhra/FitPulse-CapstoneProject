@@ -152,5 +152,10 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
             }
         }
     }
+
+    fun setActionBarTitle(title: String) {
+        binding.appBarMain.toolbar.title = title
+    }
+
 }
 
