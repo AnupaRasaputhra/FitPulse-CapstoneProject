@@ -1,29 +1,26 @@
 package com.example.fitpulse.ui.home
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.fitpulse.MainActivity
 import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentHomeBinding
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 
-class HomeFragment() : Fragment(), SensorEventListener {
+class HomeFragment : Fragment(), SensorEventListener {
 
     private val viewModel: SetGoalsViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
@@ -65,8 +62,11 @@ class HomeFragment() : Fragment(), SensorEventListener {
         }
 
         binding.waterIntakeCardView.setOnClickListener {
-            val waterGoal = binding.waterIntakeCardView.findViewById<TextView>(R.id.waterTarget).text.toString().replace("/", "").toInt()
-            val waterIntake = binding.waterIntake.findViewById<TextView>(R.id.waterIntake).text.toString().toInt()
+            val waterGoal =
+                binding.waterIntakeCardView.findViewById<TextView>(R.id.waterTarget).text.toString()
+                    .replace("/", "").toInt()
+            val waterIntake =
+                binding.waterIntake.findViewById<TextView>(R.id.waterIntake).text.toString().toInt()
 
             val bundle = Bundle()
             bundle.putInt("waterGoal", waterGoal)
@@ -82,7 +82,7 @@ class HomeFragment() : Fragment(), SensorEventListener {
         val waterIntake = arguments?.getInt("waterIntake", 0)
         updateWaterIntakeTextView(waterIntake ?: 0)
     }
-    
+
     private fun updateWaterIntakeTextView(intake: Int) {
         val waterIntakeTextView = view?.findViewById<TextView>(R.id.waterIntake)
         waterIntakeTextView?.text = intake.toString()
@@ -94,7 +94,8 @@ class HomeFragment() : Fragment(), SensorEventListener {
         val stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if (stepSensor == null) {
-            Toast.makeText(requireContext(), "No motion has been detected.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No motion has been detected.", Toast.LENGTH_SHORT)
+                .show()
         } else {
             sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
@@ -107,7 +108,6 @@ class HomeFragment() : Fragment(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-
         if (running) {
             totalSteps = event!!.values[0]
             val currentSteps = totalSteps.toInt() - previousStep.toInt()
@@ -118,12 +118,16 @@ class HomeFragment() : Fragment(), SensorEventListener {
                 setProgressWithAnimation(currentSteps.toFloat())
             }
 
+            val stepsGoal = viewModel.selectedStepsGoal.value!!.toInt()
+                if (currentSteps >= stepsGoal) {
+                    (activity as MainActivity).pushNotification()
+                }
         }
     }
 
+
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
-
 
     private fun resetData() {
         binding.liveTrackSteps.setOnLongClickListener {
@@ -141,10 +145,11 @@ class HomeFragment() : Fragment(), SensorEventListener {
         editor?.apply()
     }
 
-    private fun loadData(){
+    private fun loadData() {
         val sharedPreferences = context?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val savedSteps = sharedPreferences?.getFloat("Key 1", 0f)
         previousStep = savedSteps!!
 
     }
+
 }

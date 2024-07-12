@@ -46,4 +46,6 @@
     <string name="enter_custom_input">Enter Custom Input</string>
     <string name="water_intake">Water Intake</string>
     <string name="WorkoutHistory">Workout History</string>
+    <string name="channel_name">Steps Target Channel</string>
+    <string name="channel_description">Notification channel for steps target</string>
 </resources>

@@ -1,10 +1,22 @@
 package com.example.fitpulse
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -23,6 +35,7 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var vM: SetGoalsViewModel
+    private val CHANNEL_ID = "step_goal_channel"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +46,7 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
         vM = ViewModelProvider(this)[SetGoalsViewModel::class.java]
 
         setSupportActionBar(binding.appBarMain.toolbar)
+        createNotificationChannel()
 
         val drawerLayout = binding.drawerLayout
         val navView = binding.navView
@@ -63,6 +77,7 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
                     }
                     true
                 }
+
                 else -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     navController.navigate(menuItem.itemId)
@@ -70,7 +85,6 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
                 }
             }
         }
-
     }
 
     override fun onSubmitClicked(calculatedCalories: Double) {
@@ -80,6 +94,63 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system.
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun pushNotification() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.notification_icon)
+            .setContentTitle("Target Reached!")
+            .setContentText("Congratulations! You've reached your step goal for today.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        val notificationManager = NotificationManagerCompat.from(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                1
+            )
+            return
+        }
+        notificationManager.notify(1, builder.build())
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                pushNotification()
+            } else {
+                Log.e("MainActivity", "Notification permission denied")
+            }
+        }
     }
 }
 
