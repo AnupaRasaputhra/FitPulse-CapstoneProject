@@ -54,10 +54,12 @@ class BMIFragment : Fragment() {
         val weight = bmiBinding.inputWeight.text.toString()
         val height = bmiBinding.inputHeight.text.toString()
 
-        sharedPrefEditor.apply {
-            putInt("weight_sf", weight.toInt())
-            putInt("height_sf", height.toInt())
-            commit()
+        if (weight.isNotEmpty() && height.isNotEmpty()) {
+            sharedPrefEditor.apply {
+                putInt("weight_sf", weight.toInt())
+                putInt("height_sf", height.toInt())
+                commit()
+            }
         }
     }
 
