@@ -1,12 +1,12 @@
 package com.example.fitpulse.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,6 +79,10 @@ class HomeFragment : Fragment(), SensorEventListener {
             findNavController().navigate(R.id.action_homeFragment_to_logWorkoutFragment)
         }
 
+        binding.bmiData.setOnClickListener {
+            findNavController().navigate(R.id.action_BMIFragment_to_homeFragment)
+        }
+
         val waterIntake = arguments?.getInt("waterIntake", 0)
         updateWaterIntakeTextView(waterIntake ?: 0)
     }
@@ -107,6 +111,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onSensorChanged(event: SensorEvent?) {
         if (running) {
             totalSteps = event!!.values[0]
@@ -119,9 +124,9 @@ class HomeFragment : Fragment(), SensorEventListener {
             }
 
             val stepsGoal = viewModel.selectedStepsGoal.value!!.toInt()
-                if (currentSteps >= stepsGoal) {
-                    (activity as MainActivity).pushNotification()
-                }
+            if (currentSteps >= stepsGoal) {
+                (activity as MainActivity).pushNotification()
+            }
         }
     }
 

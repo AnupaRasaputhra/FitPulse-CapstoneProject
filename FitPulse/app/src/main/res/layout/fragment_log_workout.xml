@@ -7,11 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.logWorkout.LogWorkoutFragment">
 
-    <!-- Title -->
-
-    <!-- Workout Title -->
-
-    <!-- Workout Description -->
     <EditText
         android:id="@+id/workoutTitle"
         android:layout_width="0dp"
@@ -39,7 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutTitle" />
 
-    <!-- Workout Duration -->
     <EditText
         android:id="@+id/workoutDuration"
         android:layout_width="0dp"
@@ -53,13 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutDescription" />
 
-    <!-- Pick Date Button -->
-
-    <!-- Selected Date Label -->
-
-    <!-- Save Workout Button -->
-
-    <!-- RecyclerView -->
     <Button
         android:id="@+id/buttonSaveWorkout"
         android:layout_width="wrap_content"
@@ -81,7 +68,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonSaveWorkout" />
-
-    <!-- Summary Section -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

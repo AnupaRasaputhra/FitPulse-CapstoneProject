@@ -27,6 +27,13 @@
                 android:defaultValue="0" />
         </action>
         <action
+            android:id="@+id/action_BMIFragment_to_homeFragment"
+            app:destination="@id/nav_home">
+
+        </action>
+
+
+        <action
             android:id="@+id/action_homeFragment_to_logWorkoutFragment"
             app:destination="@id/logWorkoutFragment" />
     </fragment>
