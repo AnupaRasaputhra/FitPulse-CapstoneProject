@@ -1,6 +1,6 @@
+// HomeFragment.kt
 package com.example.fitpulse.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -18,11 +18,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.fitpulse.MainActivity
 import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentHomeBinding
+import com.example.fitpulse.ui.footstepsHistory.FootStepsHistoryViewModel
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 
 class HomeFragment : Fragment(), SensorEventListener {
 
     private val viewModel: SetGoalsViewModel by activityViewModels()
+    private val sharedViewModel: FootStepsHistoryViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -80,7 +82,11 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
         binding.bmiData.setOnClickListener {
-            findNavController().navigate(R.id.action_BMIFragment_to_homeFragment)
+            findNavController().navigate(R.id.nav_bmi_calculator)
+        }
+
+        binding.stepTrackerCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_footStepsHistoryFragment)
         }
 
         val waterIntake = arguments?.getInt("waterIntake", 0)
@@ -111,7 +117,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onSensorChanged(event: SensorEvent?) {
         if (running) {
             totalSteps = event!!.values[0]
@@ -127,9 +132,11 @@ class HomeFragment : Fragment(), SensorEventListener {
             if (currentSteps >= stepsGoal) {
                 (activity as MainActivity).pushNotification()
             }
+
+            val dayOfWeek = java.time.LocalDate.now().dayOfWeek.toString()
+            sharedViewModel.updateStepsData(dayOfWeek, currentSteps)
         }
     }
-
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
@@ -156,5 +163,4 @@ class HomeFragment : Fragment(), SensorEventListener {
         previousStep = savedSteps!!
 
     }
-
 }
