@@ -82,6 +82,13 @@
             android:name="waterTarget"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_waterIntakeFragment_to_statsActivity"
+            app:destination="@id/statsActivity" />
     </fragment>
+
+    <activity
+        android:id="@+id/statsActivity"
+        android:name="com.example.fitpulse.ui.waterTracker.StatsActivity" />
 
 </navigation>

@@ -13,6 +13,8 @@ import com.example.fitpulse.MainActivity
 import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentWaterIntakeBinding
 import com.google.android.material.textfield.TextInputLayout
+import android.content.Intent
+
 
 class WaterIntakeFragment : Fragment() {
     private var _binding: FragmentWaterIntakeBinding? = null
@@ -44,11 +46,6 @@ class WaterIntakeFragment : Fragment() {
         (requireActivity() as MainActivity).setActionBarTitle("Water Intake")
     }
 
-
-
-
-
-
     private fun observeViewModel() {
         viewModel.targetIntake.observe(viewLifecycleOwner, { targetIntake ->
             binding.tvTotalIntake.text = targetIntake.toString()
@@ -57,7 +54,6 @@ class WaterIntakeFragment : Fragment() {
         viewModel.currentIntake.observe(viewLifecycleOwner, { currentIntake ->
             binding.tvIntook.text = currentIntake.toString()
         })
-
 
         viewModel.goalAchieved.observe(viewLifecycleOwner, { goalAchieved ->
             if (goalAchieved) {
@@ -75,6 +71,13 @@ class WaterIntakeFragment : Fragment() {
 
         binding.opCustom.setOnClickListener {
             showCustomInputDialog()
+        }
+        binding.btnStats.setOnClickListener {
+            val intent = Intent(activity, StatsActivity::class.java).apply {
+                putExtra("waterGoal", viewModel.targetIntake.value?.replace("/", "")?.replace(" ml", "")?.toInt())
+                putExtra("waterIntake", viewModel.currentIntake.value)
+            }
+            startActivity(intent)
         }
     }
 
@@ -94,7 +97,7 @@ class WaterIntakeFragment : Fragment() {
         val bundle = Bundle().apply {
             putInt("waterIntake", currentIntake)
         }
-        findNavController().navigate(R.id.action_waterIntakeFragment_to_homeFragment, bundle)
+        //findNavController().navigate(R.id.action_waterIntakeFragment_to_homeFragment, bundle)
     }
 
     private fun showCustomInputDialog() {

@@ -39,6 +39,14 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -59,5 +67,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("androidx.core:core-ktx:1.10.0")
 
+    implementation("com.github.tangqi92:WaveLoadingView:v0.3.5")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation ("androidx.core:core-ktx:1.10.1")
 }
 
