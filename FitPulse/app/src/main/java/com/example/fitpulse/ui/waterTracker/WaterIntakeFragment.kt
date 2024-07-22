@@ -97,7 +97,6 @@ class WaterIntakeFragment : Fragment() {
         val bundle = Bundle().apply {
             putInt("waterIntake", currentIntake)
         }
-        //findNavController().navigate(R.id.action_waterIntakeFragment_to_homeFragment, bundle)
     }
 
     private fun showCustomInputDialog() {
