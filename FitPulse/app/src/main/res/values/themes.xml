@@ -22,4 +22,11 @@
     <style name="Theme.FitPulse.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.FitPulse.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Splash screen theme -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
 </resources>
