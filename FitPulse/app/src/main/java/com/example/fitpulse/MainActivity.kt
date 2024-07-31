@@ -1,30 +1,32 @@
 package com.example.fitpulse
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fitpulse.databinding.ActivityMainBinding
+import com.example.fitpulse.ui.inapptutorial.InapptutActivity
 import com.example.fitpulse.ui.setgoals.SetGoalsDialogFragment
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 import com.example.fitpulse.ui.slideshow.SlideshowFragment
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var navController: NavController
     private lateinit var vM: SetGoalsViewModel
     private val CHANNEL_ID = "step_goal_channel"
 
@@ -51,7 +53,10 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
         val drawerLayout = binding.drawerLayout
         val navView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+//        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -77,7 +82,11 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
                     }
                     true
                 }
-
+                R.id.nav_tutorial -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    startActivity(Intent(this, InapptutActivity::class.java))
+                    true
+                }
                 else -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     navController.navigate(menuItem.itemId)
@@ -85,8 +94,8 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
                 }
             }
         }
-    }
 
+    }
     override fun onSubmitClicked(calculatedCalories: Double) {
         Log.d("MainActivity", "Calculated Calories: $calculatedCalories")
     }
@@ -157,5 +166,18 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
         binding.appBarMain.toolbar.title = title
     }
 
-}
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_tutorial -> {
+                startActivity(Intent(this, InapptutActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+}

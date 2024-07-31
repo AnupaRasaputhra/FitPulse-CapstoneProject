@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_waterIntakeFragment"
-            app:destination="@id/fragment_water_intake">
+            app:destination="@id/fragment_water_intake" >
             <argument
                 android:name="waterGoal"
                 app:argType="integer" />

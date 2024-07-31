@@ -1,7 +1,7 @@
-// HomeFragment.kt
 package com.example.fitpulse.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -20,6 +20,8 @@ import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentHomeBinding
 import com.example.fitpulse.ui.footstepsHistory.FootStepsHistoryViewModel
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
+import com.example.fitpulse.ui.inapptutorial.InapptutActivity
+import java.time.LocalDate
 
 class HomeFragment : Fragment(), SensorEventListener {
 
@@ -52,9 +54,17 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
+
+        if (isFirstRun) {
+            val intent = Intent(requireActivity(), InapptutActivity::class.java)
+            startActivity(intent)
+            sharedPreferences.edit().putBoolean("isFirstRun", false).apply()
+        }
+
         viewModel.selectedStepsGoal.observe(viewLifecycleOwner) { stepsGoal ->
-            binding.stepTrackerCardView.findViewById<TextView>(R.id.targetSteps).text =
-                "/${stepsGoal}"
+            binding.stepTrackerCardView.findViewById<TextView>(R.id.targetSteps).text = "/${stepsGoal}"
             binding.circularProgressBar.progressMax = stepsGoal.toFloat()
         }
 
@@ -133,7 +143,7 @@ class HomeFragment : Fragment(), SensorEventListener {
                 (activity as MainActivity).pushNotification()
             }
 
-            val dayOfWeek = java.time.LocalDate.now().dayOfWeek.toString()
+            val dayOfWeek = LocalDate.now().dayOfWeek.toString()
             sharedViewModel.updateStepsData(dayOfWeek, currentSteps)
         }
     }

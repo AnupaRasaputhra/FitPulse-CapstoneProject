@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#c8ebe4">
+
+    <ImageView
+        android:id="@+id/stepTrackingImage"
+        android:layout_width="wrap_content"
+        android:layout_height="322dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/step_tracking_illustration"
+        android:scaleType="fitCenter"
+        android:src="@drawable/stepcount_illustration" />
+
+    <TextView
+        android:id="@+id/stepTrackingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stepTrackingImage"
+        android:layout_centerHorizontal="true"
+        android:text="@string/step_tracking"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#11161C"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/stepTrackingDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stepTrackingTitle"
+        android:layout_centerHorizontal="true"
+        android:text="@string/step_tracking_description"
+        android:textSize="18sp"
+        android:textColor="#11161C"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/stepCounterDemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stepTrackingDescription"
+        android:layout_centerHorizontal="true"
+        android:text="@string/step_counter_demo"
+        android:textSize="24sp"
+        android:textColor="#11161C"
+        android:layout_marginTop="24dp"/>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/next"
+        android:textSize="18sp"
+        android:layout_marginBottom="32dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:backgroundTint="#e3d5bc"
+        android:textColor="#11161C"/>
+
+</RelativeLayout>

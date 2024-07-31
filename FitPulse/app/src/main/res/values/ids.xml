@@ -8,4 +8,5 @@
     <item name="buttonPickDate" type="id" />
     <item name="textViewSelectedDate" type="id" />
     <item name="buttonSaveWorkout" type="id" />
+
 </resources>

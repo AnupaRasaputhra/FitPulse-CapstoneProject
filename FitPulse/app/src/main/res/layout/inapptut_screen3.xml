@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/waterIntakeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="292dp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/water_intake_illustration"
+        android:scaleType="fitCenter"
+        android:src="@drawable/water_intake_illustartion" />
+
+    <TextView
+        android:id="@+id/waterIntakeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/waterIntakeImage"
+        android:layout_centerHorizontal="true"
+        android:text="@string/water_intake"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#11161C"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/waterIntakeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/waterIntakeTitle"
+        android:layout_centerHorizontal="true"
+        android:text="@string/water_intake_description"
+        android:textSize="18sp"
+        android:textColor="#11161C"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/waterIntakeDemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/waterIntakeDescription"
+        android:layout_centerHorizontal="true"
+        android:text="@string/water_intake_demo"
+        android:textSize="24sp"
+        android:textColor="#11161C"
+        android:layout_marginTop="24dp"/>
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="137dp"
+        android:layout_marginBottom="32dp"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp"
+        android:text="@string/next"
+        android:backgroundTint="#C0DAFF"
+        android:textColor="#11161C"  
+        android:textSize="18sp" />
+</RelativeLayout>
