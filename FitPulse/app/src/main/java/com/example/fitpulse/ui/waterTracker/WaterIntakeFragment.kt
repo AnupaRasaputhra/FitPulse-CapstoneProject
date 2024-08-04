@@ -14,6 +14,7 @@ import com.example.fitpulse.R
 import com.example.fitpulse.databinding.FragmentWaterIntakeBinding
 import com.google.android.material.textfield.TextInputLayout
 import android.content.Intent
+import androidx.fragment.app.setFragmentResult
 
 
 class WaterIntakeFragment : Fragment() {
@@ -97,6 +98,8 @@ class WaterIntakeFragment : Fragment() {
         val bundle = Bundle().apply {
             putInt("waterIntake", currentIntake)
         }
+        setFragmentResult("waterIntakeKey", bundle) // Set the fragment result
+
     }
 
     private fun showCustomInputDialog() {

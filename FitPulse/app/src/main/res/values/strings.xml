@@ -53,7 +53,7 @@
     <string name="monitor_your_fitness_journey_and_stay_motivated">Monitor your fitness journey and stay motivated.</string>
     <string name="athelete_women">athelete women</string>
     <string name="finish">Finish</string>
-    <string name="menu_tutorial">menu_tutorial</string>
+    <string name="menu_tutorial">In-app Tutorial</string>
     <string name="step_counter_illustration">Step counter illustration</string>
     <string name="step_counting_feature">Step Counting Feature</string>
     <string name="step_counting_description">FitPulse automatically counts your steps throughout the day. Set daily goals and track your progress effortlessly!</string>
@@ -81,7 +81,7 @@
     <string name="step_counter_demo">Steps: 0 / 10,000</string>
     <string name="water_intake">Water Intake</string>
     <string name="water_intake_description">Monitor your daily water intake and set goal for better hydration. Tap to add glasses of water, simulating daily water intake.</string>
-    <string name="water_intake_demo">Water Intake: 0 / 8 glasses</string>
+    <string name="water_intake_demo">Water Intake: 0 / 1000 ml</string>
     <string name="bmi_calculator_description">Calculate your Body Mass Index (BMI) to take control of your health. BMI is an estimate of body fat and a good gauge of your risk for diseases that can occur with more body fat. The higher your BMI, the higher your risk for certain diseases. Tapping the screen displays a sample BMI calculation result.</string>
     <string name="bmi_calculator_demo">Tap to calculate your BMI</string>
     <string name="goal_setting_description">Set personalized fitness goals to stay motivated. Tapping sets sample goals for steps and water intake, demonstrating how users can set their fitness targets.</string>

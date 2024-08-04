@@ -71,5 +71,8 @@ dependencies {
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     implementation ("androidx.core:core-ktx:1.10.1")
+
+    implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation ("androidx.preference:preference:1.1.1")
 }
 

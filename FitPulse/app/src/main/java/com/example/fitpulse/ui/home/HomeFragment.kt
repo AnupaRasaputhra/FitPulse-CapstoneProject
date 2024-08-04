@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.fitpulse.MainActivity
 import com.example.fitpulse.R
@@ -22,6 +23,7 @@ import com.example.fitpulse.ui.footstepsHistory.FootStepsHistoryViewModel
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 import com.example.fitpulse.ui.inapptutorial.InapptutActivity
 import com.example.fitpulse.ui.stepcounter.StepCounterViewModel
+import com.example.fitpulse.ui.waterTracker.WaterIntakeViewModel
 import java.time.LocalDate
 
 class HomeFragment : Fragment(), SensorEventListener {
@@ -29,6 +31,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     private val viewModel: SetGoalsViewModel by activityViewModels()
     private val sharedViewModel: FootStepsHistoryViewModel by activityViewModels()
     private val stepCounterViewModel: StepCounterViewModel by activityViewModels()
+    private val waterIntakeViewModel: WaterIntakeViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -75,6 +78,11 @@ class HomeFragment : Fragment(), SensorEventListener {
                 "${waterGoal}"
         }
 
+        // Observe water intake data
+        waterIntakeViewModel.currentIntake.observe(viewLifecycleOwner) { waterIntake ->
+            updateWaterIntakeTextView(waterIntake)
+        }
+
         binding.waterIntakeCardView.setOnClickListener {
             val waterGoal =
                 binding.waterIntakeCardView.findViewById<TextView>(R.id.waterTarget).text.toString()
@@ -101,8 +109,17 @@ class HomeFragment : Fragment(), SensorEventListener {
             findNavController().navigate(R.id.action_homeFragment_to_footStepsHistoryFragment)
         }
 
-        val waterIntake = arguments?.getInt("waterIntake", 0)
-        updateWaterIntakeTextView(waterIntake ?: 0)
+        // Initialize water intake display
+        val waterIntake = waterIntakeViewModel.currentIntake.value ?: 0
+        updateWaterIntakeTextView(waterIntake)
+
+        // Set up listener for the water intake result from WaterIntakeFragment
+        setFragmentResultListener("waterIntakeKey") { _, bundle ->
+            val newWaterIntake = bundle.getInt("waterIntake")
+            waterIntakeViewModel.setCurrentIntake(newWaterIntake)
+            updateWaterIntakeTextView(newWaterIntake)
+        }
+
     }
 
     private fun updateWaterIntakeTextView(intake: Int) {

@@ -37,6 +37,7 @@
             android:theme="@style/Theme.FitPulse.NoActionBar" />
 
         <activity android:name=".ui.waterTracker.StatsActivity" />
+        <activity android:name=".ui.settings.SettingsActivity" />
 
     </application>
 

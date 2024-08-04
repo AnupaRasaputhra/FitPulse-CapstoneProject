@@ -257,6 +257,7 @@
         android:padding="8dp"
         android:src="@drawable/ic_stats"
         app:fabSize="mini"
+        app:backgroundTint="@color/button_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"

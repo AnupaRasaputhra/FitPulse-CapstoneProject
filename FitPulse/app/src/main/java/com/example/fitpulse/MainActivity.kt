@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -25,10 +27,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.example.fitpulse.databinding.ActivityMainBinding
 import com.example.fitpulse.ui.inapptutorial.InapptutActivity
 import com.example.fitpulse.ui.setgoals.SetGoalsDialogFragment
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
+import com.example.fitpulse.ui.settings.SettingsActivity
 import com.example.fitpulse.ui.slideshow.SlideshowFragment
 
 class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListener {
@@ -44,6 +48,13 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
 //        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply theme based on saved preference
+        val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        )
 
         vM = ViewModelProvider(this)[SetGoalsViewModel::class.java]
 
@@ -175,6 +186,11 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
         return when (item.itemId) {
             R.id.action_tutorial -> {
                 startActivity(Intent(this, InapptutActivity::class.java))
+                true
+            }
+            R.id.action_settings -> {
+                // Start the settings activity
+                startActivity(Intent(this, SettingsActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
