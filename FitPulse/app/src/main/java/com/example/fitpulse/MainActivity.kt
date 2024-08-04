@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), SlideshowFragment.OnSubmitClickListene
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.set_goals, R.id.nav_bmi_calculator, R.id.nav_slideshow
+                R.id.nav_home, R.id.set_goals, R.id.nav_bmi_calculator, R.id.nav_slideshow, R.id.nav_progress_summary
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

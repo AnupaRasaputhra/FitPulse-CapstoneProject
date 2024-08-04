@@ -91,4 +91,10 @@
         android:id="@+id/statsActivity"
         android:name="com.example.fitpulse.ui.waterTracker.StatsActivity" />
 
+    <fragment
+        android:id="@+id/nav_progress_summary"
+        android:name="com.example.fitpulse.ui.progresssummary.ProgressSummaryFragment"
+        android:label="Progress Summary"
+        tools:layout="@layout/fragment_progress_summary" />
+
 </navigation>

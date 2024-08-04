@@ -21,12 +21,14 @@ import com.example.fitpulse.databinding.FragmentHomeBinding
 import com.example.fitpulse.ui.footstepsHistory.FootStepsHistoryViewModel
 import com.example.fitpulse.ui.setgoals.SetGoalsViewModel
 import com.example.fitpulse.ui.inapptutorial.InapptutActivity
+import com.example.fitpulse.ui.stepcounter.StepCounterViewModel
 import java.time.LocalDate
 
 class HomeFragment : Fragment(), SensorEventListener {
 
     private val viewModel: SetGoalsViewModel by activityViewModels()
     private val sharedViewModel: FootStepsHistoryViewModel by activityViewModels()
+    private val stepCounterViewModel: StepCounterViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -133,6 +135,7 @@ class HomeFragment : Fragment(), SensorEventListener {
             val currentSteps = totalSteps.toInt() - previousStep.toInt()
             binding.stepTrackerCardView.findViewById<TextView>(R.id.liveTrackSteps).text =
                 "${currentSteps}"
+            stepCounterViewModel.updateCurrentSteps(currentSteps)
 
             binding.circularProgressBar.apply {
                 setProgressWithAnimation(currentSteps.toFloat())
@@ -145,6 +148,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
             val dayOfWeek = LocalDate.now().dayOfWeek.toString()
             sharedViewModel.updateStepsData(dayOfWeek, currentSteps)
+            stepCounterViewModel.updateCurrentSteps(currentSteps)
         }
     }
 
